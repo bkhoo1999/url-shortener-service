@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   namespace :api do
       resources :links, param: :url_slug
   end
-  get '*path', to: 'home#index', via: :all
-  post '/:url_slug', to: 'api/links#track_link'
+  get '/', to: 'home#index', via: :all
+  get '/:url_slug', to: 'api/links#track_link'
 end

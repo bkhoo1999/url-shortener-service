@@ -17,7 +17,7 @@ module Api
       @transaction.geolocation = request.ip
 
       if @link.update_attribute(:clicks, @link.clicks + 1) && @transaction.save
-        return_link_response(@link)
+        redirect_to(@link.original_url, allow_other_host: true)
       else           
         render json: { 
           linkError: @link.errors, 
