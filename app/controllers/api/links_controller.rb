@@ -3,8 +3,7 @@ module Api
     before_action :set_link, only: %i[track_link show index create]
 
     def index
-      @links = Link.all
-      return_link_response(@links)
+      return_link_response(Link.all)
     end
 
     def show 
@@ -12,18 +11,25 @@ module Api
     end
 
     def track_link
+      if @link.nil? 
+        render json: {
+          error: "Link not found"
+        },
+        status: :not_found and return
+      end
+
       @transaction = Transaction.new
       @transaction.link_id = @link.id
       @transaction.geolocation = request.ip
 
       if @link.update_attribute(:clicks, @link.clicks + 1) && @transaction.save
-        return_link_response(@link)
+        redirect_to(@link.original_url, allow_other_host: true)
       else           
         render json: { 
           linkError: @link.errors, 
           transactionError: @transaction.errors 
         }, 
-          status: :bad_request
+        status: :bad_request
       end
     end
 
