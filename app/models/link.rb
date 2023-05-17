@@ -4,8 +4,9 @@ class Link < ApplicationRecord
     
     validates :original_url, presence: true, on: :create_table
     validates_format_of :original_url, with: URL_REGEX
-    before_create :generate_slug
+    before_create :generate_slug, :retrieve_title
     has_many :transactions
+    attr_accessor :request
 
     def generate_slug
         new_url_slug = ([*('a'..'z'),*('0'..'9')]).sample(UNIQUE_SLUG_LENGTH).join
@@ -14,11 +15,12 @@ class Link < ApplicationRecord
             self.generate_slug
         else 
             self.url_slug = new_url_slug
+            self.short_url = "#{@request.protocol}#{@request.host_with_port}/#{new_url_slug}"
         end
     end
 
-    def is_new_link?
-        Link.find_by_original_url(self.original_url).nil?
+    def retrieve_title
+        self.title = Mechanize.new.get(self.original_url).title || nil
     end
 
 end
