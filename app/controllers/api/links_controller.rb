@@ -10,7 +10,7 @@ module Api
     # GET /api/links/{url_slug} - Get link based on url_slug.
     def show 
       if @link.nil? 
-        return_link_not_found_error and return
+        return_error("Link not found.", :not_found) and return
       end
       return_link_response(@link)
     end
@@ -18,7 +18,7 @@ module Api
     # GET /{url_slug} - Redirect to original_url and save click transaction.
     def track_link
       if @link.nil? 
-        return_link_not_found_error and return
+        return_error("Link not found.", :not_found) and return
       end
 
       @transaction = Transaction.new
@@ -28,11 +28,7 @@ module Api
       if @link.update_attribute(:clicks, @link.clicks + 1) && @transaction.save
         redirect_to(@link.original_url, allow_other_host: true)
       else           
-        render json: { 
-          linkError: @link.errors, 
-          transactionError: @transaction.errors 
-        }, 
-        status: :bad_request
+        return_error("Failed to redirect to original url.", :bad_request) 
       end
     end
 
@@ -45,7 +41,7 @@ module Api
       if @link.save
           return_link_response(@link) 
       else 
-        render json: @link.errors, status: :bad_request
+        return_error("Failed to add new url.", :bad_request) 
       end
     end
 
@@ -54,11 +50,11 @@ module Api
         @link = Link.where(url_slug: params[:url_slug]).first
       end
 
-      def return_link_not_found_error 
+      def return_error(error_message, status_code)
         render json: {
-          error: "Link not found"
+          error: error_message
         },
-        status: :not_found
+        status: status_code
       end
 
       def return_link_response(link)

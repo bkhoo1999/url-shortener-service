@@ -1,11 +1,35 @@
-import React from 'react';
+import React from "react";
+import { connect, ExposedAction } from "react-redux";
+import { bindActionCreators } from "redux";
 
-function App() {
+import { State } from "./store";
+import { actions as linksAction } from "./store/links";
+
+const App = (props: AppProps) => {
+  const { linksAction } = props;
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <button
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+      onClick={() =>
+        linksAction?.fetchLinks().catch((error) => console.log(error))
+      }
+    >
+      Button
+    </button>
   );
+};
+
+interface AppProps {
+  links?: State["links"];
+  linksAction?: ExposedAction<typeof linksAction>;
 }
 
-export default App;
+export default connect(
+  (state: State) => ({
+    links: state.links,
+  }),
+  (dispatch: any) =>
+    ({
+      linksAction: bindActionCreators(linksAction, dispatch),
+    } as any)
+)(App);
