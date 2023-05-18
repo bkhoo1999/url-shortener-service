@@ -23,7 +23,7 @@ module Api
 
       @transaction = Transaction.new
       @transaction.link_id = @link.id
-      @transaction.geolocation = request.remote_ip
+      @transaction.geolocation = request.headers['origin']
 
       if @link.update_attribute(:clicks, @link.clicks + 1) && @transaction.save
         redirect_to(@link.original_url, allow_other_host: true)

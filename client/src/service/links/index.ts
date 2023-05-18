@@ -1,5 +1,5 @@
-import FetchUtil from "../../utils/fetch";
-import { API_URL } from "../../utils/constant";
+import FetchUtil from "../../util/fetch";
+import { API_URL } from "../../util/constant";
 
 export const getLinks = (): Promise<LinksServiceType.Link[]> =>
   FetchUtil.callFetch({

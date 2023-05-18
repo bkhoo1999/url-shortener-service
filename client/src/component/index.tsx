@@ -2,10 +2,10 @@ import React from "react";
 import { connect, ExposedAction } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { State } from "./store";
-import { actions as linksAction } from "./store/links";
+import { State } from "../store";
+import { actions as linksAction } from "../store/links";
 
-const App = (props: AppProps) => {
+const Main = (props: MainProps) => {
   const { linksAction } = props;
   return (
     <button
@@ -19,7 +19,7 @@ const App = (props: AppProps) => {
   );
 };
 
-interface AppProps {
+interface MainProps {
   links?: State["links"];
   linksAction?: ExposedAction<typeof linksAction>;
 }
@@ -32,4 +32,4 @@ export default connect(
     ({
       linksAction: bindActionCreators(linksAction, dispatch),
     } as any)
-)(App);
+)(Main);

@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import axios from "axios";
 import { Provider } from "react-redux";
 
-import { interceptor } from "./utils/interceptor";
-import store from "./store";
+import "./style/index.css";
+import { interceptor } from "./util/interceptor";
 
-import "./index.css";
-import App from "./App";
+import store from "./store";
+import Main from "./component";
 
 interceptor(axios);
 
@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Main />
     </Provider>
   </React.StrictMode>
 );
