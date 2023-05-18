@@ -16,7 +16,23 @@ const appReducer = combineReducers({
   links,
 });
 
-const rootReducer = (state: any, action: any) => appReducer(state, action);
+const rootReducer = (state, action) => {
+  switch (action.type) {
+    case "CLEAR_NEW_LINK":
+      return appReducer(
+        {
+          ...initialState,
+          links: {
+            ...state.links,
+            newLink: undefined,
+          },
+        },
+        action
+      );
+    default:
+      return appReducer(state, action);
+  }
+};
 
 const store = () => {
   const middlewares = [thunk, logger];

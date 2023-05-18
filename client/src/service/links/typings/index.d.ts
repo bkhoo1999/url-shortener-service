@@ -12,4 +12,8 @@ declare namespace LinksServiceType {
     geolocation: string;
     createdAt: Date;
   }
+
+  interface CreateLinkReq {
+    original_url: string;
+  }
 }
