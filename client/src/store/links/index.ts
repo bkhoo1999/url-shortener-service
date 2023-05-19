@@ -6,7 +6,7 @@ export const initialState = {
   isFetchingLinks: false,
   isCreatingLink: false,
   newLink: undefined,
-  links: [],
+  linkList: [],
   error: "",
 } as LinksStore.State;
 
@@ -29,7 +29,7 @@ export const actions = {
       .then((response) => {
         dispatch({
           type: actionTypes.FETCH_LINKS_SUCCESS,
-          links: response,
+          linkList: response,
         });
         return Promise.resolve(response);
       })
@@ -74,7 +74,7 @@ const LinkReduxClass = (
     case "FETCH_LINKS_REQUEST":
       return { ...state, isFetchingLinks: true, error: "" };
     case "FETCH_LINKS_SUCCESS":
-      return { ...state, isFetchingLinks: false, links: action.links };
+      return { ...state, isFetchingLinks: false, linkList: action.linkList };
     case "FETCH_LINKS_ERROR":
       return { ...state, isFetchingLinks: false, error: action.error };
     case "CREATE_LINK_REQUEST":
