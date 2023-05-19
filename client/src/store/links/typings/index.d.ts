@@ -2,7 +2,8 @@ declare namespace LinksStore {
   interface State {
     isFetchingLinks: boolean;
     isCreatingLink: boolean;
-    newLink: LinksServiceType.Link;
+    isSearchingLink: boolean;
+    currentLink: LinksServiceType.Link;
     linkList: LinksServiceType.Link[];
     error: string;
   }
@@ -21,11 +22,21 @@ declare namespace LinksStore {
   };
   type setCreateLinkErrorAction = { type: "CREATE_LINK_ERROR"; error: string };
 
+  type setSearchLinkRequestAction = { type: "SEARCH_LINK_REQUEST" };
+  type setSearchLinkSuccessAction = {
+    type: "SEARCH_LINK_SUCCESS";
+    searchLink: LinksServiceType.Link;
+  };
+  type setSearchLinkErrorAction = { type: "SEARCH_LINK_ERROR"; error: string };
+
   type Actions =
     | setFetchLinksRequestAction
     | setFetchLinksSuccessAction
     | setFetchLinksErrorAction
     | setCreateLinkRequestAction
     | setCreateLinkSuccessAction
-    | setCreateLinkErrorAction;
+    | setCreateLinkErrorAction
+    | setSearchLinkRequestAction
+    | setSearchLinkSuccessAction
+    | setSearchLinkErrorAction;
 }

@@ -7,6 +7,12 @@ export const getLinks = (): Promise<LinksServiceType.Link[]> =>
     method: "GET",
   });
 
+export const searchLink = (urlSlug: string): Promise<LinksServiceType.Link> =>
+  FetchUtil.callFetch({
+    url: `${API_URL}/api/links/${urlSlug}`,
+    method: "GET",
+  });
+
 export const createLink = (
   req: LinksServiceType.CreateLinkReq
 ): Promise<LinksServiceType.Link> =>

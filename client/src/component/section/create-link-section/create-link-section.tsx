@@ -10,17 +10,19 @@ import * as StringUtil from "../../../util/string";
 import Accordion from "../../common/accordion-component";
 import Textfield from "../../common/textfield-component";
 import Button from "../../common/button-component";
+import { API_URL } from "../../../util/constant";
 
 const CreateLinkSection = (props: CreateLinkSectionProps) => {
   const { links, linksAction } = props;
-  const { isFetchingLinks, isCreatingLink } = links;
+  const { isFetchingLinks, isCreatingLink, isSearchingLink } = links;
 
   const [url, setUrl] = useState<string>("");
 
-  const loading = isCreatingLink || isFetchingLinks;
+  const loading = isCreatingLink || isFetchingLinks || isSearchingLink;
   const formValid = !!url && StringUtil.isStringUrl(url);
+  const searchValid = !!url && url.includes(API_URL);
 
-  const createLink = () => {
+  const createLink = () =>
     linksAction
       .createLink({ original_url: url })
       .catch((error) => console.error(error))
@@ -28,7 +30,12 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
         linksAction.fetchLinks();
         setUrl("");
       });
-  };
+
+  const searchLink = () =>
+    linksAction
+      .searchLink(StringUtil.getUrlSlug(url))
+      .catch((error) => console.error(error))
+      .finally(() => setUrl(""));
 
   const renderCreateLinkContent = () => (
     <div className="grid grid-cols-2 gap-4">
@@ -40,7 +47,7 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
       <div className="col-span-2">
         <Textfield
           loading={loading}
-          error={!formValid}
+          error={!formValid && !searchValid}
           label="Enter a URL"
           placeholder="URL Link ..."
           value={url}
@@ -56,8 +63,8 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
         />
         <Button
           label="Search URL"
-          onClick={() => {}}
-          disabled={!formValid}
+          onClick={searchLink}
+          disabled={!searchValid}
           loading={loading}
         />
       </div>

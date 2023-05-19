@@ -5,7 +5,7 @@ import * as LinksService from "../../service/links";
 export const initialState = {
   isFetchingLinks: false,
   isCreatingLink: false,
-  newLink: undefined,
+  currentLink: undefined,
   linkList: [],
   error: "",
 } as LinksStore.State;
@@ -17,6 +17,9 @@ export const actionTypes = {
   CREATE_LINK_REQUEST: "CREATE_LINK_REQUEST",
   CREATE_LINK_SUCCESS: "CREATE_LINK_SUCCESS",
   CREATE_LINK_ERROR: "CREATE_LINK_ERROR",
+  SEARCH_LINK_REQUEST: "SEARCH_LINK_REQUEST",
+  SEARCH_LINK_SUCCESS: "SEARCH_LINK_SUCCESS",
+  SEARCH_LINK_ERROR: "SEARCH_LINK_ERROR",
 };
 
 export const actions = {
@@ -64,6 +67,28 @@ export const actions = {
           return Promise.reject(error);
         });
     },
+
+  searchLink: (urlSlug: string) => (dispatch: Dispatch<any>) => {
+    dispatch({
+      type: actionTypes.SEARCH_LINK_REQUEST,
+    });
+
+    return LinksService.searchLink(urlSlug)
+      .then((response) => {
+        dispatch({
+          type: actionTypes.SEARCH_LINK_SUCCESS,
+          searchLink: response,
+        });
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        dispatch({
+          type: actionTypes.SEARCH_LINK_ERROR,
+          error,
+        });
+        return Promise.reject(error);
+      });
+  },
 };
 
 const LinkReduxClass = (
@@ -80,9 +105,19 @@ const LinkReduxClass = (
     case "CREATE_LINK_REQUEST":
       return { ...state, isCreatingLink: true, error: "" };
     case "CREATE_LINK_SUCCESS":
-      return { ...state, isCreatingLink: false, newLink: action.newLink };
+      return { ...state, isCreatingLink: false, currentLink: action.newLink };
     case "CREATE_LINK_ERROR":
       return { ...state, isCreatingLink: false, error: action.error };
+    case "SEARCH_LINK_REQUEST":
+      return { ...state, isSearchingLink: true, error: "" };
+    case "SEARCH_LINK_SUCCESS":
+      return {
+        ...state,
+        isSearchingLink: false,
+        currentLink: action.searchLink,
+      };
+    case "SEARCH_LINK_ERROR":
+      return { ...state, isSearchingLink: false, error: action.error };
     default:
       return state;
   }

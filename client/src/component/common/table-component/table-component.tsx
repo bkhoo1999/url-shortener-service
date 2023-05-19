@@ -16,16 +16,27 @@ const TableComponent = (props: TableComponentProps) => {
       <table className={TableComponentClass.TABLE}>
         <thead className={TableComponentClass.TABLE_HEAD}>
           <tr>
-            {dataHeader?.map((title) => (
-              <th className={TableComponentClass.TABLE_HEAD_CELL}>{title}</th>
+            {dataHeader?.map((title, index) => (
+              <th
+                key={`table-header-${title}-${index}`}
+                className={TableComponentClass.TABLE_HEAD_CELL}
+              >
+                {title}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {dataRow?.map((row, index) => (
-            <tr className={TableComponentClass.TABLE_ROW}>
-              {Object.keys(row).map((dataTitle) => (
-                <td className={TableComponentClass.TABLE_ROW_CELL}>
+            <tr
+              className={TableComponentClass.TABLE_ROW}
+              key={`table-row-${index}`}
+            >
+              {Object.keys(row).map((dataTitle, titleIndex) => (
+                <td
+                  className={TableComponentClass.TABLE_ROW_CELL}
+                  key={`table-data-${dataTitle}-${titleIndex}`}
+                >
                   {formatData(row?.[dataTitle])}
                 </td>
               ))}

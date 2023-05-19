@@ -37,9 +37,9 @@ const ModalComponent = (props: ModalComponentProps) => {
                 viewBox="0 0 20 20"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d={MODAL_CLOSE_ICON_PATH}
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
             </button>
