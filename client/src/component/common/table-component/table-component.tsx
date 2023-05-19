@@ -4,6 +4,13 @@ import { TableComponentClass } from "./table-component.classname";
 const TableComponent = (props: TableComponentProps) => {
   const { dataHeader, dataRow } = props;
 
+  const formatData = (data) => {
+    if (typeof data === "number") {
+      return data;
+    }
+    return data || "-";
+  };
+
   return (
     <div className={TableComponentClass.TABLE_CONTAINER}>
       <table className={TableComponentClass.TABLE}>
@@ -19,7 +26,7 @@ const TableComponent = (props: TableComponentProps) => {
             <tr className={TableComponentClass.TABLE_ROW}>
               {Object.keys(row).map((dataTitle) => (
                 <td className={TableComponentClass.TABLE_ROW_CELL}>
-                  {row?.[dataTitle] || "-"}
+                  {formatData(row?.[dataTitle])}
                 </td>
               ))}
             </tr>

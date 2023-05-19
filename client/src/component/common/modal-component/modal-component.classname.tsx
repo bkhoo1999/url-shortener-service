@@ -3,7 +3,7 @@ export enum ModalComponentClass {
   MODAL_OUTER_CONTAINER = "relative w-full max-w-4xl max-h-full left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2",
   MODAL_INNER_CONTAINER = "relative bg-white rounded-lg shadow",
   MODAL_HEADER_CONTAINER = "flex items-start justify-between p-4 border-b rounded-t",
-  MODAL_TITLE = "text-xl font-semibold text-gray-900",
+  MODAL_TITLE = "text-xl font-bold text-gray-900",
   MODAL_CLOSE_BUTTON = "text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center",
   MODAL_CLOSE_ICON = "w-5 h-5",
   MODAL_CONTENT_CONTAINER = "p-6 space-y-6 h-[30rem] overflow-y-auto",
