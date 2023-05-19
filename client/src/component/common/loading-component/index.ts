@@ -1,3 +1,3 @@
-import LoadingComponent from "./loading-component";
+import Loader from "./loading-component";
 
-export default LoadingComponent;
+export default Loader;

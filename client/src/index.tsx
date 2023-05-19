@@ -16,9 +16,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Main />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <Main />
+  </Provider>
 );

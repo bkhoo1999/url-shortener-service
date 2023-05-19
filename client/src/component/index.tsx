@@ -1,25 +1,11 @@
 import React from "react";
-import { connect, ExposedAction } from "react-redux";
-import { bindActionCreators } from "redux";
 
-import { State } from "../store";
-import { actions as linksAction } from "../store/links";
+import ClickReportSection from "./section/click-report-section";
 
-const Main = (props: MainProps) => {
-  return <></>;
-};
+const Main = () => (
+  <div className="px-20 py-20">
+    <ClickReportSection />
+  </div>
+);
 
-interface MainProps {
-  links?: State["links"];
-  linksAction?: ExposedAction<typeof linksAction>;
-}
-
-export default connect(
-  (state: State) => ({
-    links: state.links,
-  }),
-  (dispatch: any) =>
-    ({
-      linksAction: bindActionCreators(linksAction, dispatch),
-    } as any)
-)(Main);
+export default Main;
