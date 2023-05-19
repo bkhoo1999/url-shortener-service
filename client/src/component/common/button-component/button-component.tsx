@@ -8,9 +8,14 @@ const ButtonComponent = (props: ButtonComponentProps) => {
   const { BUTTON } = ButtonComponentClass;
 
   return (
-    <button type="button" onClick={onClick} disabled={loading || disabled} className={BUTTON}>
-        {label}
-        {loading && <Loader />}
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={loading || disabled}
+      className={BUTTON}
+    >
+      {label}
+      {loading && <Loader />}
     </button>
   );
 };
@@ -20,6 +25,6 @@ interface ButtonComponentProps {
   loading?: boolean;
   disabled?: boolean;
   onClick: () => void;
-};
+}
 
-export default (ButtonComponent);
+export default ButtonComponent;

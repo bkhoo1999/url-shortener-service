@@ -6,28 +6,26 @@ const TableComponent = (props: TableComponentProps) => {
 
   return (
     <div className={TableComponentClass.TABLE_CONTAINER}>
-        <table className={TableComponentClass.TABLE}>
-            <thead className={TableComponentClass.TABLE_HEAD}>
-                <tr>
-                    {dataHeader?.map((title) => (
-                        <th className={TableComponentClass.TABLE_HEAD_CELL}>
-                            {title}
-                        </th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {dataRow?.map((row, index) => (
-                    <tr className={TableComponentClass.TABLE_ROW}>
-                        {Object.keys(row).map((dataTitle) => (
-                            <td className={TableComponentClass.TABLE_ROW_CELL}>
-                                {row?.[dataTitle] || "-"}
-                            </td>
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+      <table className={TableComponentClass.TABLE}>
+        <thead className={TableComponentClass.TABLE_HEAD}>
+          <tr>
+            {dataHeader?.map((title) => (
+              <th className={TableComponentClass.TABLE_HEAD_CELL}>{title}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {dataRow?.map((row, index) => (
+            <tr className={TableComponentClass.TABLE_ROW}>
+              {Object.keys(row).map((dataTitle) => (
+                <td className={TableComponentClass.TABLE_ROW_CELL}>
+                  {row?.[dataTitle] || "-"}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
@@ -35,6 +33,6 @@ const TableComponent = (props: TableComponentProps) => {
 interface TableComponentProps {
   dataHeader: string[];
   dataRow: Record<string, any>[];
-};
+}
 
-export default (TableComponent);
+export default TableComponent;

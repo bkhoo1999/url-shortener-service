@@ -6,9 +6,7 @@ import { State } from "../store";
 import { actions as linksAction } from "../store/links";
 
 const Main = (props: MainProps) => {
-  return (
-    <></>
-  );
+  return <></>;
 };
 
 interface MainProps {
