@@ -10,7 +10,7 @@ declare namespace LinksServiceType {
 
   interface Transaction {
     geolocation: string;
-    createdAt: Date;
+    created_at: Date;
   }
 
   interface CreateLinkReq {

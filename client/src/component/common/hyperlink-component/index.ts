@@ -1,3 +1,3 @@
-import HyperlinkComponent from "./hyperlink-component";
+import Hyperlink from "./hyperlink-component";
 
-export default HyperlinkComponent;
+export default Hyperlink;

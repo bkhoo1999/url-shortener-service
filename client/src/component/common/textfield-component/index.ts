@@ -1,3 +1,3 @@
-import TextfieldComponent from "./textfield-component";
+import Textfield from "./textfield-component";
 
-export default TextfieldComponent;
+export default Textfield;
