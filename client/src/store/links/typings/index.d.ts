@@ -3,14 +3,14 @@ declare namespace LinksStore {
     isFetchingLinks: boolean;
     isCreatingLink: boolean;
     newLink: LinksServiceType.Link;
-    links: LinksServiceType.Link[];
+    linkList: LinksServiceType.Link[];
     error: string;
   }
 
   type setFetchLinksRequestAction = { type: "FETCH_LINKS_REQUEST" };
   type setFetchLinksSuccessAction = {
     type: "FETCH_LINKS_SUCCESS";
-    links: LinksServiceType.Link[];
+    linkList: LinksServiceType.Link[];
   };
   type setFetchLinksErrorAction = { type: "FETCH_LINKS_ERROR"; error: string };
 
