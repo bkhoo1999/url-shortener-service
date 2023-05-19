@@ -1,3 +1,3 @@
-import TransactionsSection from "./transactions-modal";
+import TransactionsModal from "./transactions-modal";
 
-export default TransactionsSection;
+export default TransactionsModal;

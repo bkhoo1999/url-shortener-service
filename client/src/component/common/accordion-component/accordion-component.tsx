@@ -7,7 +7,7 @@ import {
 } from "./accordion-component.classname";
 
 const AccordionComponent = (props: AccordionComponentProps) => {
-  const { title, loading, children } = props;
+  const { title, loading, children, expand } = props;
   const {
     ACCORDION_ARROW_ICON_PATH,
     ACCORDION_PADDING,
@@ -31,18 +31,18 @@ const AccordionComponent = (props: AccordionComponentProps) => {
       <h2>
         <button
           type="button"
-          disabled={loading}
+          disabled={loading || expand}
           onClick={() => setOpen(!open)}
-          className={AccordionComponentHeader(open && !loading)}
+          className={AccordionComponentHeader((open && !loading) || expand)}
         >
           <span className={ACCORDION_TITLE}>
             {title}
             {loading && <Loader />}
           </span>
-          {renderIcon()}
+          {!expand && renderIcon()}
         </button>
       </h2>
-      <div className={!open || loading ? "hidden" : ""}>
+      <div className={!open || (loading && !expand) ? "hidden" : ""}>
         <div className={ACCORDION_CONTENT}>{children}</div>
       </div>
     </div>
@@ -52,6 +52,7 @@ const AccordionComponent = (props: AccordionComponentProps) => {
 interface AccordionComponentProps extends React.PropsWithChildren {
   title: string;
   loading?: boolean;
+  expand?: boolean;
 }
 
 export default AccordionComponent;

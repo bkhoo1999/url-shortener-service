@@ -27,10 +27,11 @@ const ClickReportSection = (props: ClickReportSectionProps) => {
     });
 
   const fetchLinks = () =>
-    linksAction.fetchLinks().catch((error) => console.log(error));
+    linksAction.fetchLinks().catch((error) => console.error(error));
 
   useEffect(() => {
     fetchLinks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { currentTransactions, transactionsModalOpen } = state;
@@ -52,7 +53,6 @@ const ClickReportSection = (props: ClickReportSectionProps) => {
       <Button
         label="View Transactions"
         disabled={(link?.transactions || [])?.length === 0}
-        loading={isFetchingLinks}
         onClick={() => setCurrentState(link?.transactions, true)}
       />
     ),
@@ -63,6 +63,7 @@ const ClickReportSection = (props: ClickReportSectionProps) => {
       <div>No links found</div>
     ) : (
       <div>
+        <h3 className="font-semibold pb-5">View your link details here!</h3>
         <Button label="Refresh" onClick={fetchLinks} />
         <Table
           dataHeader={clickReportTableHeader}
