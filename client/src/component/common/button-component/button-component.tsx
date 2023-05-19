@@ -1,4 +1,3 @@
-import React from "react";
 import Loader from "../loading-component";
 
 import { ButtonComponentClass } from "./button-component.classname";

@@ -1,5 +1,5 @@
-import React from "react";
 import Loader from "../loading-component";
+
 import {
   TextfieldComponentClass,
   TextfieldInput,

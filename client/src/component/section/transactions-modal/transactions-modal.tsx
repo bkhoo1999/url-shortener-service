@@ -1,5 +1,3 @@
-import React from "react";
-
 import * as DateUtil from "../../../util/date";
 
 import Modal from "../../common/modal-component";
@@ -17,7 +15,7 @@ const TransactionsModal = (props: TransactionsModalProps) => {
 
   const renderTransactionsContent = () =>
     (transactions || [])?.length === 0 ? (
-      <div>No Transactions found</div>
+      <h2>No Transactions found</h2>
     ) : (
       <Table
         dataHeader={TransactionsTableHeader}

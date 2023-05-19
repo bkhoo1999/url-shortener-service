@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connect, ExposedAction } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -10,6 +10,7 @@ import Table from "../../common/table-component";
 import Button from "../../common/button-component";
 import Hyperlink from "../../common/hyperlink-component";
 import TransactionsModal from "../transactions-modal/transactions-modal";
+import Grid from "../../common/grid-component";
 
 const ClickReportSection = (props: ClickReportSectionProps) => {
   const { links, linksAction } = props;
@@ -60,21 +61,27 @@ const ClickReportSection = (props: ClickReportSectionProps) => {
 
   const renderClickReportContent = () =>
     (linkList || [])?.length === 0 ? (
-      <div>No links found</div>
+      <h2>No links found</h2>
     ) : (
-      <div>
-        <h3 className="font-semibold pb-5">View your link details here!</h3>
-        <Button label="Refresh" onClick={fetchLinks} />
-        <Table
-          dataHeader={clickReportTableHeader}
-          dataRow={clickReportTableRow}
-        />
+      <Grid type="container">
         <TransactionsModal
           transactions={currentTransactions}
           open={transactionsModalOpen}
           onClose={() => setCurrentState(currentTransactions, false)}
         />
-      </div>
+        <Grid type="item">
+          <h3 className="font-semibold pb-5">View your link details here!</h3>
+        </Grid>
+        <Grid type="item">
+          <Button label="Refresh" onClick={fetchLinks} />
+        </Grid>
+        <Grid type="item">
+          <Table
+            dataHeader={clickReportTableHeader}
+            dataRow={clickReportTableRow}
+          />
+        </Grid>
+      </Grid>
     );
 
   return (

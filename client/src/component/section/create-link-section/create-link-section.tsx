@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { connect, ExposedAction } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -6,11 +6,12 @@ import { State } from "../../../store";
 import { actions as linksAction } from "../../../store/links";
 
 import * as StringUtil from "../../../util/string";
+import { API_URL } from "../../../util/constant";
 
 import Accordion from "../../common/accordion-component";
 import Textfield from "../../common/textfield-component";
 import Button from "../../common/button-component";
-import { API_URL } from "../../../util/constant";
+import Grid from "../../common/grid-component";
 
 const CreateLinkSection = (props: CreateLinkSectionProps) => {
   const { links, linksAction } = props;
@@ -38,13 +39,13 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
       .finally(() => setUrl(""));
 
   const renderCreateLinkContent = () => (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="col-span-2">
+    <Grid type="container" column={2} spacing={4}>
+      <Grid type="item" width={2}>
         <h1 className="font-semibold text-lg">
           Welcome to Ben's URL Shortener!
         </h1>
-      </div>
-      <div className="col-span-2">
+      </Grid>
+      <Grid type="item" width={2}>
         <Textfield
           loading={loading}
           error={!formValid && !searchValid}
@@ -53,8 +54,8 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
           value={url}
           onChange={(value) => setUrl(value)}
         />
-      </div>
-      <div>
+      </Grid>
+      <Grid type="item">
         <Button
           label="Generate URL"
           onClick={createLink}
@@ -67,11 +68,11 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
           disabled={!searchValid}
           loading={loading}
         />
-      </div>
-      <div className="text-end">
+      </Grid>
+      <Grid type="item" alignItem="right">
         <Button label="Clear" onClick={() => setUrl("")} loading={loading} />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 
   return (

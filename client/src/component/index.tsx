@@ -1,17 +1,18 @@
-import React from "react";
-
+import Grid from "./common/grid-component";
 import ClickReportSection from "./section/click-report-section";
 import CreateLinkSection from "./section/create-link-section";
 
 const Main = () => (
-  <div className="grid grid-cols-2 gap-4 px-20 py-20">
-    <div>
-      <CreateLinkSection />
-    </div>
-    <div className="..." />
-    <div className="col-span-2">
-      <ClickReportSection />
-    </div>
+  <div className="px-20 py-20">
+    <Grid type="container" column={2} spacing={4}>
+      <Grid type="item">
+        <CreateLinkSection />
+      </Grid>
+      <Grid type="item" />
+      <Grid type="item" width={2}>
+        <ClickReportSection />
+      </Grid>
+    </Grid>
   </div>
 );
 
