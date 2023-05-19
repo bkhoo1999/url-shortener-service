@@ -3,3 +3,6 @@ const urlRegex = new RegExp(
 );
 
 export const isStringUrl = (urlString: string) => urlRegex.test(urlString);
+
+export const getUrlSlug = (urlString: string) =>
+  urlString?.split("/")?.findLast((string) => string);
