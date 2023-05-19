@@ -1,4 +1,3 @@
-import React from "react";
 import { TableComponentClass } from "./table-component.classname";
 
 const TableComponent = (props: TableComponentProps) => {

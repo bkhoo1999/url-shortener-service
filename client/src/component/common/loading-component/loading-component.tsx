@@ -1,4 +1,3 @@
-import React from "react";
 import { LoadingComponentClass } from "./loading-component.classname";
 
 const LoadingComponent = () => {

@@ -1,4 +1,3 @@
-import React from "react";
 import { HyperlinkComponentClass } from "./hyperlink-component-classname";
 
 const HyperlinkComponent = (props: HyperlinkComponentProps) => {
