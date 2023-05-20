@@ -1,6 +1,6 @@
 const apiUrl = {
   development: "http://localhost:3000",
-  production: "https://ben-ly.herokuapp.com/",
+  production: "https://ben-ly.herokuapp.com",
 };
 
 export const API_URL =
