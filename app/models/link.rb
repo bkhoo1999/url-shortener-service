@@ -20,7 +20,11 @@ class Link < ApplicationRecord
     end
 
     def retrieve_title
-        self.title = Mechanize.new.get(self.original_url).title || nil
+        begin 
+            self.title = Mechanize.new.get(self.original_url).title
+        rescue => e 
+            self.title = ""
+        end
     end
 
 end

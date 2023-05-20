@@ -1,7 +1,0 @@
-{
-  "name": "url-shortener-service",
-  "version": "1.0.0",
-  "scripts": {
-    "deploy": "cd client && npm install && npm run build"
-  }
-}
