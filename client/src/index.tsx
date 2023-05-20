@@ -1,6 +1,12 @@
 import ReactDOM from "react-dom/client";
 import axios from "axios";
 import { Provider } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import "./style/index.css";
 import { interceptor } from "./util/interceptor";
@@ -16,6 +22,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Provider store={store}>
-    <Main />
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Redirect from="*" to="/" />
+      </Switch>
+    </Router>
   </Provider>
 );
