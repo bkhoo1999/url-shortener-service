@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { connect, ExposedAction } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -104,9 +104,9 @@ const LinkResultSection = (props: LinkResultSectionProps) => {
     <Grid type="item">
       <Grid type="container" column={7}>
         {Object.keys(currentLink || {})
-          .filter((title) => title !== "url_slug")
-          ?.map((title) => (
-            <>
+          ?.filter((title) => title !== "url_slug")
+          ?.map((title, index) => (
+            <React.Fragment key={`data-grid-${title}-${index}`}>
               <Grid type="item">
                 <h1 className="font-bold">{`${StringUtil.camelToTitleCase(
                   title
@@ -115,7 +115,7 @@ const LinkResultSection = (props: LinkResultSectionProps) => {
               <Grid type="item" width={6}>
                 {renderLinkInfoData(title as keyof LinksServiceType.Link)}
               </Grid>
-            </>
+            </React.Fragment>
           ))}
       </Grid>
     </Grid>
