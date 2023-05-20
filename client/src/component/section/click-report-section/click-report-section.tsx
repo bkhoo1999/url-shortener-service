@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 import { State } from "../../../store";
 import { actions as linksAction } from "../../../store/links";
 
+import * as DateUtil from "../../../util/date";
+
 import Accordion from "../../common/accordion-component";
 import Table from "../../common/table-component";
 import Button from "../../common/button-component";
@@ -12,23 +14,50 @@ import Hyperlink from "../../common/hyperlink-component";
 import TransactionsModal from "../transactions-modal/transactions-modal";
 import Grid from "../../common/grid-component";
 
+let POLL_COUNT = 0;
+
 const ClickReportSection = (props: ClickReportSectionProps) => {
   const { links, linksAction } = props;
   const { linkList, isFetchingLinks } = links;
+
+  const [error, setError] = useState<boolean>(false);
 
   const [state, setState] = useState<ClickReportSectionState>({
     currentTransactions: undefined,
     transactionsModalOpen: false,
   });
 
-  const setCurrentState = (newTransactions, modalState) =>
+  const setCurrentState = (
+    newTransactions: LinksServiceType.Transaction[],
+    modalState: boolean
+  ) =>
     setState({
       currentTransactions: newTransactions,
       transactionsModalOpen: modalState,
     });
 
-  const fetchLinks = () =>
-    linksAction.fetchLinks().catch((error) => console.error(error));
+  const fetchLinks = (link?: LinksServiceType.Link, withPoll?: boolean) =>
+    linksAction
+      .fetchLinks()
+      .then((res) => {
+        setError(false);
+        const chosenLinkClick = res?.find(
+          (resLink) => resLink?.url_slug === link?.url_slug
+        );
+        if (
+          withPoll &&
+          POLL_COUNT < 2 &&
+          link?.clicks === chosenLinkClick?.clicks
+        ) {
+          POLL_COUNT++;
+          fetchLinks(link, withPoll);
+        }
+        POLL_COUNT = 0;
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(true);
+      });
 
   useEffect(() => {
     fetchLinks();
@@ -38,6 +67,7 @@ const ClickReportSection = (props: ClickReportSectionProps) => {
   const { currentTransactions, transactionsModalOpen } = state;
 
   const clickReportTableHeader = [
+    "Created Date",
     "Title",
     "Short Url",
     "Original Url",
@@ -46,22 +76,45 @@ const ClickReportSection = (props: ClickReportSectionProps) => {
   ];
 
   const clickReportTableRow = (linkList || []).map((link) => ({
+    createdDate: DateUtil.formatDate(link?.created_at),
     title: link?.title,
-    shortUrl: <Hyperlink link={link?.short_url} onClick={fetchLinks} />,
+    shortUrl: (
+      <Hyperlink
+        link={link?.short_url}
+        onClick={() => fetchLinks(link, true)}
+      />
+    ),
     originalUrl: <Hyperlink link={link?.original_url} />,
     clicks: link?.clicks,
     transactions: (
       <Button
-        label="View Transactions"
+        label="View"
         disabled={(link?.transactions || [])?.length === 0}
         onClick={() => setCurrentState(link?.transactions, true)}
       />
     ),
   }));
 
+  const renderClickReportTitle = (notFound?: boolean) => (
+    <Grid type="item">
+      <Grid type="container" column={3}>
+        <Grid type="item" width={2}>
+          <h1 className="font-semibold text-lg pb-3">
+            {!notFound ? "View your link details here!" : "No links found!"}
+          </h1>
+        </Grid>
+        {(error || (links?.linkList?.length > 0 && !error)) && (
+          <Grid type="item" alignItem="right">
+            <Button label="Refresh List" onClick={fetchLinks} />
+          </Grid>
+        )}
+      </Grid>
+    </Grid>
+  );
+
   const renderClickReportContent = () =>
     (linkList || [])?.length === 0 ? (
-      <h2>No links found</h2>
+      renderClickReportTitle(true)
     ) : (
       <Grid type="container">
         <TransactionsModal
@@ -69,12 +122,7 @@ const ClickReportSection = (props: ClickReportSectionProps) => {
           open={transactionsModalOpen}
           onClose={() => setCurrentState(currentTransactions, false)}
         />
-        <Grid type="item">
-          <h3 className="font-semibold pb-5">View your link details here!</h3>
-        </Grid>
-        <Grid type="item">
-          <Button label="Refresh" onClick={fetchLinks} />
-        </Grid>
+        <Grid type="item">{renderClickReportTitle()}</Grid>
         <Grid type="item">
           <Table
             dataHeader={clickReportTableHeader}

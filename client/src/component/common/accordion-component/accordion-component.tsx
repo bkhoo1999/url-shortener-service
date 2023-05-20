@@ -18,7 +18,7 @@ const AccordionComponent = (props: AccordionComponentProps) => {
 
   const renderIcon = () => (
     <svg
-      className={AccordionComponentTitleIcon(open)}
+      className={AccordionComponentTitleIcon(!loading && open)}
       fill="currentColor"
       viewBox="0 0 20 20"
     >
@@ -31,9 +31,12 @@ const AccordionComponent = (props: AccordionComponentProps) => {
       <h2>
         <button
           type="button"
-          disabled={loading || expand}
-          onClick={() => setOpen(!open)}
-          className={AccordionComponentHeader((open && !loading) || expand)}
+          disabled={loading && !expand}
+          onClick={() => !expand && setOpen(!open)}
+          className={AccordionComponentHeader(
+            (open && !loading) || expand,
+            expand
+          )}
         >
           <span className={ACCORDION_TITLE}>
             {title}

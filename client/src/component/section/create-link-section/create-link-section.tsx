@@ -21,7 +21,10 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
 
   const loading = isCreatingLink || isFetchingLinks || isSearchingLink;
   const formValid = !!url && StringUtil.isStringUrl(url);
-  const searchValid = !!url && url.includes(API_URL);
+  const searchValid =
+    !!url &&
+    url.includes(API_URL) &&
+    StringUtil.getUrlSlug(url)?.trim()?.length === 6;
 
   const createLink = () =>
     linksAction
@@ -38,14 +41,21 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
       .catch((error) => console.error(error))
       .finally(() => setUrl(""));
 
+  const clearLink = () => {
+    setUrl("");
+    if (links?.currentLink || links?.error) {
+      linksAction.clearLink();
+    }
+  };
+
   const renderCreateLinkContent = () => (
-    <Grid type="container" column={2} spacing={4}>
-      <Grid type="item" width={2}>
-        <h1 className="font-semibold text-lg">
+    <Grid type="container" column={3}>
+      <Grid type="item" width={3}>
+        <h1 className="font-semibold text-lg pb-3">
           Welcome to Ben's URL Shortener!
         </h1>
       </Grid>
-      <Grid type="item" width={2}>
+      <Grid type="item" width={3}>
         <Textfield
           loading={loading}
           error={!formValid && !searchValid}
@@ -55,22 +65,22 @@ const CreateLinkSection = (props: CreateLinkSectionProps) => {
           onChange={(value) => setUrl(value)}
         />
       </Grid>
-      <Grid type="item">
+      <Grid type="item" width={2}>
         <Button
-          label="Generate URL"
+          label="Generate"
           onClick={createLink}
           disabled={!formValid}
           loading={loading}
         />
         <Button
-          label="Search URL"
+          label="Search"
           onClick={searchLink}
           disabled={!searchValid}
           loading={loading}
         />
       </Grid>
       <Grid type="item" alignItem="right">
-        <Button label="Clear" onClick={() => setUrl("")} loading={loading} />
+        <Button label="Clear" onClick={clearLink} loading={loading} />
       </Grid>
     </Grid>
   );

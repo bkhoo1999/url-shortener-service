@@ -29,6 +29,8 @@ declare namespace LinksStore {
   };
   type setSearchLinkErrorAction = { type: "SEARCH_LINK_ERROR"; error: string };
 
+  type setClearLinkAction = { type: "CLEAR_LINK" };
+
   type Actions =
     | setFetchLinksRequestAction
     | setFetchLinksSuccessAction
@@ -38,5 +40,6 @@ declare namespace LinksStore {
     | setCreateLinkErrorAction
     | setSearchLinkRequestAction
     | setSearchLinkSuccessAction
-    | setSearchLinkErrorAction;
+    | setSearchLinkErrorAction
+    | setClearLinkAction;
 }

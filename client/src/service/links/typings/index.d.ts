@@ -1,5 +1,6 @@
 declare namespace LinksServiceType {
   interface Link {
+    created_at: Date;
     original_url: string;
     short_url: string;
     url_slug: string;
