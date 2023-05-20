@@ -2,10 +2,10 @@ import React from "react";
 import { GridContainer, GridItem } from "./grid-component.classname";
 
 const GridComponent = (props: GridComponentProps) => {
-  const { type, spacing, column, width, alignItem, children } = props;
+  const { type, column, width, alignItem, children } = props;
 
   const renderGridContainer = () => (
-    <div className={GridContainer(column, spacing)}>{children}</div>
+    <div className={GridContainer(column)}>{children}</div>
   );
 
   const renderGridItem = () => (
@@ -17,7 +17,6 @@ const GridComponent = (props: GridComponentProps) => {
 
 interface GridComponentProps extends React.PropsWithChildren {
   type: "container" | "item";
-  spacing?: number;
   column?: number;
   width?: number;
   alignItem?: "left" | "center" | "right";

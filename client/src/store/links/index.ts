@@ -20,6 +20,7 @@ export const actionTypes = {
   SEARCH_LINK_REQUEST: "SEARCH_LINK_REQUEST",
   SEARCH_LINK_SUCCESS: "SEARCH_LINK_SUCCESS",
   SEARCH_LINK_ERROR: "SEARCH_LINK_ERROR",
+  CLEAR_LINK: "CLEAR_LINK",
 };
 
 export const actions = {
@@ -89,6 +90,12 @@ export const actions = {
         return Promise.reject(error);
       });
   },
+
+  clearLink: () => (dispatch: Dispatch<any>) => {
+    dispatch({
+      type: actionTypes.CLEAR_LINK,
+    });
+  },
 };
 
 const LinkReduxClass = (
@@ -118,6 +125,8 @@ const LinkReduxClass = (
       };
     case "SEARCH_LINK_ERROR":
       return { ...state, isSearchingLink: false, error: action.error };
+    case "CLEAR_LINK":
+      return { ...state, currentLink: undefined, error: "" };
     default:
       return state;
   }

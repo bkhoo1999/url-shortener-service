@@ -5,7 +5,7 @@ export enum TextfieldComponentClass {
   TEXTFIELD_INPUT_ERROR = "bg-red-50 border border-red-500 text-red-900 placeholder-red-700",
   TEXTFIELD_INPUT_SUCCESS = "bg-green-50 border border-green-500 text-green-900 placeholder-green-700",
   TEXTFIELD_CONTAINER = "relative",
-  TEXTFIELD_LOADER = "absolute top-0 right-0 p-2.5 bg-transparent",
+  TEXTFIELD_LOADER = "opacity-30 absolute top-0 right-0 p-2.5 bg-transparent",
 }
 
 export const TextfieldInput = (error, value) => {

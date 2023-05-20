@@ -4,7 +4,12 @@ module Api
 
     # GET /api/links - List all links and related transactions. 
     def index
-      return_link_response(Link.all)
+      @link = Link.all
+      if @link
+          return_link_response(@link) 
+      else 
+        return_error("Failed to fetch link list.", :bad_request) 
+      end
     end
 
     # GET /api/links/{url_slug} - Get link based on url_slug.
@@ -64,7 +69,7 @@ module Api
             except: [:id, :updated_at, :link_id] 
           }
         },
-        except: [:id, :updated_at, :created_at],
+        except: [:id, :updated_at],
         status: :ok
       end
   end
