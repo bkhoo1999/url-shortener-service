@@ -13,7 +13,7 @@ class Link < ApplicationRecord
 				self.generate_slug
 			else 
 				self.url_slug = new_url_slug
-				self.short_url = "#{@requestProtocol}#{@requestHost}/#{new_url_slug}"
+				self.short_url = "#{@request_protocol}#{@request_host}/#{new_url_slug}"
 			end
     end
 
