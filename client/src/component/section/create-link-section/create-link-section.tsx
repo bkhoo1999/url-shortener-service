@@ -13,7 +13,7 @@ import Textfield from "../../common/textfield-component";
 import Button from "../../common/button-component";
 import Grid from "../../common/grid-component";
 
-const CreateLinkSection = (props: CreateLinkSectionProps) => {
+export const CreateLinkSection = (props: CreateLinkSectionProps) => {
   const { links, linksAction } = props;
   const { isFetchingLinks, isCreatingLink, isSearchingLink } = links;
 

@@ -24,7 +24,7 @@ const TransactionsModal = (props: TransactionsModalProps) => {
     );
 
   return (
-    <Modal title="Click Report" open={open} onClose={onClose}>
+    <Modal title="Transactions" open={open} onClose={onClose}>
       {renderTransactionsContent()}
     </Modal>
   );
