@@ -1,12 +1,12 @@
 module Api
   class LinksController < ApplicationController
-    before_action :set_link, only: %i[track_link show index create]
+    before_action :set_link, only: %i[track_link show]
 
     # GET /api/links - List all links and related transactions. 
     def index
       @link = Link.all
       if @link
-          return_link_response(@link) 
+        return_link_response(@link) 
       else 
         return_error("Failed to fetch link list.", :bad_request) 
       end
@@ -17,7 +17,7 @@ module Api
       if @link.nil? 
         return_error("Link not found.", :not_found) and return
       end
-      return_link_response(@link)
+        return_link_response(@link)
     end
 
     # GET /{url_slug} - Redirect to original_url and save click transaction.
@@ -40,11 +40,12 @@ module Api
     # POST /api/links - Create new link record through request body { original_url: "URL_LINK" }
     def create
       @link = Link.new
-      @link.request = request
+      @link.request_protocol = request.protocol
+      @link.request_host = request.host_with_port
       @link.original_url = params[:original_url]
       
       if @link.save
-          return_link_response(@link) 
+        return_link_response(@link) 
       else 
         return_error("Failed to add new url.", :bad_request) 
       end
