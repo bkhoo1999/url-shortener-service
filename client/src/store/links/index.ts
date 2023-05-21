@@ -5,6 +5,7 @@ import * as LinksService from "../../service/links";
 export const initialState = {
   isFetchingLinks: false,
   isCreatingLink: false,
+  isSearchingLink: false,
   currentLink: undefined,
   linkList: [],
   error: "",

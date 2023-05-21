@@ -18,7 +18,7 @@ import TransactionsModal from "../transactions-modal";
 
 let POLL_COUNT = 0;
 
-const LinkResultSection = (props: LinkResultSectionProps) => {
+export const LinkResultSection = (props: LinkResultSectionProps) => {
   const { links, linksAction } = props;
   const { currentLink, error, isSearchingLink, isCreatingLink } = links;
 
@@ -97,7 +97,7 @@ const LinkResultSection = (props: LinkResultSectionProps) => {
       return <h1>{DateUtil.formatDate(currentLink?.[title])}</h1>;
     }
 
-    return <h1>{currentLink?.[title]}</h1>;
+    return <h1>{currentLink?.[title] || "-"}</h1>;
   };
 
   const renderLinkInfoSuccess = () => (
@@ -123,6 +123,11 @@ const LinkResultSection = (props: LinkResultSectionProps) => {
 
   const renderLinkResultContent = () => (
     <Grid type="container">
+      <TransactionsModal
+        open={transactionsModalOpen}
+        onClose={() => setTransactionsModalOpen(false)}
+        transactions={currentLink?.transactions}
+      />
       <Grid type="item">{renderLinkInfoTitle()}</Grid>
       {loading
         ? renderLinkInfoLoading()
@@ -131,11 +136,6 @@ const LinkResultSection = (props: LinkResultSectionProps) => {
         : currentLink
         ? renderLinkInfoSuccess()
         : ""}
-      <TransactionsModal
-        open={transactionsModalOpen}
-        onClose={() => setTransactionsModalOpen(false)}
-        transactions={currentLink?.transactions}
-      />
     </Grid>
   );
 

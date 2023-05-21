@@ -3,16 +3,19 @@ const urlRegex = new RegExp(
 );
 
 const alphaRegex = new RegExp(/\w\S*/g);
+const camelRegex = new RegExp(/_/g);
 
 export const isStringUrl = (urlString: string) => urlRegex.test(urlString);
 
-export const getUrlSlug = (urlString: string) =>
-  urlString?.split("/")?.findLast((string) => string);
+export const getUrlSlug = (urlString: string) => {
+  const string = urlString?.split("/");
+  return string?.[string?.length - 1] || "";
+};
 
 export const camelToTitleCase = (urlString: string) =>
   urlString
-    ?.replaceAll("_", " ")
-    .replaceAll(
+    ?.replace(camelRegex, " ")
+    ?.replace(
       alphaRegex,
       (string) =>
         string.charAt(0).toUpperCase() + string.substr(1).toLowerCase()

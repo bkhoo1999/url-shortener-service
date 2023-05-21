@@ -16,7 +16,7 @@ import Grid from "../../common/grid-component";
 
 let POLL_COUNT = 0;
 
-const ClickReportSection = (props: ClickReportSectionProps) => {
+export const ClickReportSection = (props: ClickReportSectionProps) => {
   const { links, linksAction } = props;
   const { linkList, isFetchingLinks } = links;
 
