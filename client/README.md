@@ -18,7 +18,7 @@ Run test on `test.tsx` files with Jest and React Test Renderer.
 
 ### `npm run build`
 
-Create build folder for existing project for Netlify deployment.
+Create build folder for existing project for <b>Netlify</b> deployment.
 
 ## Package Information
 
