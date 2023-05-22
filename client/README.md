@@ -1,6 +1,6 @@
 # URL Shortener Service Client
 
-<p>This README elaborates on Node package information, folder structuring, and client scripts</p>
+<p>This README elaborates on Node package information, folder structuring, and client scripts.</p>
 
 ## Scripts
 
