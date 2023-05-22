@@ -1,46 +1,84 @@
-# Getting Started with Create React App
+# URL Shortener Service Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>This README elaborates on Node package information, folder structuring, and client scripts</p>
 
-## Available Scripts
+## Scripts
 
-In the project directory, you can run:
+### `npm install` / `npm ci`
+
+Installs all Node packages and Dependecies. `ci` for clean install.
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Open http://localhost:5000 to view it in the browser.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run test on `test.tsx` files with Jest and React Test Renderer.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Create build folder for existing project for Netlify deployment.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Package Information
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Built on a <b>TypeScript</b> environment.
+* Testing with <b>Jest</b> and <b>React Test Renderer</b>.
+* State management and preservation with <b>Redux</b>.
+* API fetching and interception with <b>Axios</b>.
+* UI/UX Interface built with <b>Tailwind CSS</b>.
+* Interface routing with <b>React Router</b>.
+* Increase date readability with <b>Moment</b>.
 
-### `npm run eject`
+## Component Information
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Reusable/Common Components:
+<pre>
+    /component
+        /common
+         /*component-name*
+            *component-name*.classname.ts
+            *component-name*.tsx
+            index.ts
+</pre>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Hyperlink
+* Accordion
+* Button
+* Grid
+* Textfield
+* Modal
+* Table
+* Loader
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Sections:
+<pre>
+    /component
+        /section
+         /*section-name*
+            *section-name*.test.ts
+            *section-name*.tsx
+            index.ts
+</pre>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Transactions Modal - Display transactions information in table form.
+* Link Result Section - Display links information in data grid form upon `search/generate/error/clear`.
+* Click Report Section - Display links information in table form.
+* Create Link Section - Link creation or search form.
 
-## Learn More
+## Other Src Folder Information
+* Util
+    * String - format strings and store Regex formats.
+    * Date - format dates.
+    * Fetch - Create <b>Axios</b> fetch reusable function.
+    * Interceptor - Configure <b>Axios</b> request/response interceptor.
+    * Constant - Store static strings.
+    * Redux - Store mock <b>Redux</b> store for testing and increases <b>Redux</b> action capabilities.
+* Service
+    * Store API endpoint fetchings as functions to be used with <b>Redux</b>.
+* Store 
+    * Configure <b>Redux</b> store and store <b>Redux</b> actions and reducers with services.
+* Style 
+    * Configure <b>Tailwind CSS</b> directives.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# - END -
