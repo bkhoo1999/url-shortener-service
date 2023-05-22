@@ -108,6 +108,9 @@ Tools (This is self preference, do use tools of your choice) :
 
 ## API Endpoints
 <pre>
+<b>GET /</b>
+    - Home controller.
+    
 <b>GET /api/links</b>
     - Fetch all links with related transactions.
     
