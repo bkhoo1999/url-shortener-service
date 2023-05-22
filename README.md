@@ -74,7 +74,7 @@ Tools (This is self preference, do use tools of your choice) :
     * Terminal 2 (Web):
     
         <pre>cd client<br/>npm start</pre>
-        Runs on http://localhost:5096
+        Runs on http://localhost:5000
         
 ## Data Structure
 <p>Link:<p>
