@@ -51,9 +51,9 @@ describe("<CreateLinkSection/> form components", () => {
     expect(submissionButtons.length).toBe(2));
 
   test("if <CreateLinkSection/> submission buttons are a type of <Button />", () =>
-    expect(
-      submissionButtons.some((button) => button.type === Button)
-    ).toBeTruthy());
+    expect(submissionButtons.some((button) => button.type === Button)).toBe(
+      true
+    ));
 
   test("if <CreateLinkSection/> submission button to generate has label = 'Generate'", () =>
     expect(submissionButtons[0].props.label).toBe("Generate"));
