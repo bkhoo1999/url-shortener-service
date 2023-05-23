@@ -11,7 +11,7 @@ import { API_URL } from "../../../util/constant";
 import Accordion from "../../common/accordion-component";
 import Textfield from "../../common/textfield-component";
 import Button from "../../common/button-component";
-import Grid from "../../common/grid-component"; 
+import Grid from "../../common/grid-component";
 
 export const CreateLinkSection = (props: CreateLinkSectionProps) => {
   const { links, linksAction } = props;

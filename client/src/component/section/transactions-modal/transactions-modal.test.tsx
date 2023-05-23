@@ -52,6 +52,6 @@ describe("<TransactionsModal/> table", () => {
 
     expect(
       transactionsTable.props.dataRow.toString() === expectedRows.toString()
-    ).toBeTruthy();
+    ).toBe(true);
   });
 });

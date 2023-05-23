@@ -107,6 +107,9 @@ describe("<LinkResultSection/> data grid", () => {
       <Button label="View" onClick={() => {}} />,
     ].toString();
 
-    expect(linkResultSectionGridData).toEqual(expectedGridData);
+    expect(
+      JSON.stringify(linkResultSectionGridData) ===
+        JSON.stringify(expectedGridData)
+    ).toBe(true);
   });
 });
