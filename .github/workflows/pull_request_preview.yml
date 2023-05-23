@@ -26,9 +26,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: 
+    - name: Set Timezone
       uses: szenius/set-timezone@v1.2
-      with: Set Timezone
+      with:
         timezoneLinux: "Asia/Singapore"
         timezoneMacos: "Asia/Singapore"
         timezoneWindows: "Asia/Singapore"
