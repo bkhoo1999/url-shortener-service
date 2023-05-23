@@ -128,6 +128,6 @@ describe("<ClickReportSection/> table", () => {
     expect(
       clickReportSectionTable.props.dataRow.toString() ===
         expectedRows.toString()
-    ).toBeTruthy();
+    ).toBe(true);
   });
 });

@@ -1,34 +1,36 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Preview
-
 on:
   pull_request:
     types:
       - opened
       - reopened
-      - synchronized
+      - synchronize
       - edited
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [14.x]
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Set Timezone
+      uses: szenius/set-timezone@v1.2
+      with:
+        timezoneLinux: "Asia/Singapore"
+        timezoneMacos: "Asia/Singapore"
+        timezoneWindows: "Asia/Singapore"
     - name: Install
-      run: |
-          npm ci
+      run: npm ci
     - name: Build
-      run: |
-          npm run build
+      run: npm run build
     - name: Test
-      run: |
-          npm run test
+      run: npm run test
