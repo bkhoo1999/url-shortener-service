@@ -26,10 +26,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Setup timezone
-      uses: zcong1993/setup-timezone@master
-      with:
-        timezone: Asia/Malaysia
+    - name: 
+      uses: szenius/set-timezone@v1.2
+      with: Set Timezone
+        timezoneLinux: "Asia/Singapore"
+        timezoneMacos: "Asia/Singapore"
+        timezoneWindows: "Asia/Singapore"
     - name: Install
       run: npm ci
     - name: Build
